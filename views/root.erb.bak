@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Character Sheet</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <div class="characters">
+        <% for character in characters %>
+            <a href="/character/<%= character[0] %>"><%= character[0] %></a><br/>
+            <div class="<%= character[0] %>info">
+            </div>
+        <% end %>
+        </div>
+        <script type="text/javascript">
+            $.ajax({
+                url: "characters",
+            }).done(function(html){
+                $('div.characters').html(
+                    html
+                );
+            });
+        </script>
+    </body>
+</html>

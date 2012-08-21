@@ -1,0 +1,21 @@
+<body>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    Character Name: <%= name %><br/>
+    Current Hit Points: <button class="hp_minus">-</button><span class="hp_cur">(place holder)</span><button class="hp_plus">+</button><br/>
+    Maximum hit points: <%= hp_max %><br/>
+    <script type="text/javascript">
+        $.get("../character/<%= name %>/hp_cur",function(content){
+            $('.hp_cur').text(content);
+        });
+        $(".hp_minus").click(function(){
+            $.get("../character/<%= name %>/hp_minus",function(content){
+                $('.hp_cur').text(content);
+            });
+        });
+        $(".hp_plus").click(function(){
+            $.get("../character/<%= name %>/hp_plus",function(content){
+                $('.hp_cur').text(content);
+            });
+        });
+    </script>
+</body>
