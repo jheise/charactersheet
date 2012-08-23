@@ -1,12 +1,35 @@
+<html>
+<head>
+    <title>character sheet</title>
+</head>
 <body>
+    <link rel=StyleSheet href="/css/character.css" type="text/css" media=screen>
+    <!--<style type="text/css" src="/css/character.css"></style>-->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <b><%= name %></b><br/>
-    <span class="hitheader">Hit Points</span>
-    <div class="hitpoints">
-        Current Hit Points: <button class="hp_minus">-</button><span class="hp_cur">(place holder)</span><button class="hp_plus">+</button><br/>
-        Maximum hit points: <%= hp_max %><br/>
+    <div class="container">
+        <span class="hitheader">Hit Points</span>
+        <span class="hp_cur">(place holder)</span>
+        <div class="hitpoints">
+            <button class="hp_minus">-</button> <button class="hp_plus">+</button><br/>
+            Maximum hit points: <%= hp_max %><br/>
+        </div>
+    </div>
+    <div class="container">
+        <span class="itemheader">Items</span>
+        <div class="items">
+        foobar
+        </div>
     </div>
     <script type="text/javascript">
+        $(".hitpoints").hide();
+        $(".hp_cur").click(function(){
+            $(this).next('.hitpoints').slideToggle(600);
+        });
+        $(".items").hide();
+        $(".itemheader").click(function(){
+            $(this).next('.items').slideToggle(600);
+        });
         $.get("../character/<%= name %>/hp_cur",function(content){
             $('.hp_cur').text(content);
         });
@@ -21,5 +44,5 @@
             });
         });
     </script>
-    <style type="text/css" src="/css/character.css"></style>
 </body>
+<html>
