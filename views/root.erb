@@ -6,31 +6,8 @@
         <script type="text/javascript" src="/js/jquery.min.js"></script>
         <div class="characters">
         <% for character in characters %>
-            <div class="<%= character[0]%>list">
-                <div class="<%= character[0] %>header"><%= character[0] %>
-                </div>
-                <div class="<%= character[0] %>info">
-                </div>
-                Items:<br/>
-                <div class="<%= character[0] %>items">
-                    <!--<textarea name="<%= character[0] %>itemstext">-->
-                    &nbsp;- foobar
-                    <!--</textarea>-->
-                </div>
-                <script type="text/javascript">
-                    $.get("../character/<%= character[0] %>",function(content){
-                        $(".<%= character[0] %>info").html( content);
-                    });
-                    $(".<%= character[0] %>info").hide();
-                    $(".<%= character[0] %>items").hide();
-
-                    $(".<%= character[0] %>header").click(function(){
-                        $(this).next('.<%= character[0] %>info').slideToggle(600);
-                    });
-                </script>
-            <div>
+            <a href="/character/<%= character[0] %>"><%= character[0] %></a><br/>
         <% end %>
         </div>
-        <style type="text/css" src="/css/character.css"></style>
     </body>
 </html>
