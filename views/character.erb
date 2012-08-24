@@ -1,48 +1,59 @@
 <html>
-<head>
-    <title>character sheet</title>
-</head>
-<body>
-    <link rel=StyleSheet href="/css/character.css" type="text/css" media=screen>
-    <!--<style type="text/css" src="/css/character.css"></style>-->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <b><%= name %></b><br/>
-    <div class="container">
-        <span class="hitheader">Hit Points</span>
-        <span class="hp_cur">(place holder)</span>
-        <div class="hitpoints">
-            <button class="hp_minus">-</button> <button class="hp_plus">+</button><br/>
-            Maximum hit points: <%= hp_max %><br/>
+    <head>
+        <title>character sheet</title>
+    </head>
+    <body>
+        <link rel=StyleSheet href="/css/character.css" type="text/css" media=screen>
+        <!--<style type="text/css" src="/css/character.css"></style>-->
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <b><%= name %></b><br/>
+        <div class="container">
+            <span class="hitheader">Hit Points</span>
+            <span class="hp_cur">(place holder)</span>
+            <div class="hitpoints">
+                <button class="hp_minus">-</button> <button class="hp_plus">+</button><br/>
+                Maximum hit points: <%= hp_max %><br/>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <span class="itemheader">Items</span>
-        <div class="items">
-        foobar
+        <div class="container">
+            <span class="itemheader">Items</span>
+            <div class="items">
+                <div class="itemlist">
+                    foobar
+                </div>
+                <textarea id="itemsource" rows="1" cols="20" style="resize: none'"></textarea><button id="itemadd">add</button>
+            </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        $(".hitpoints").hide();
-        $(".hp_cur").click(function(){
-            $(this).next('.hitpoints').slideToggle(600);
-        });
-        $(".items").hide();
-        $(".itemheader").click(function(){
-            $(this).next('.items').slideToggle(600);
-        });
-        $.get("../character/<%= name %>/hp_cur",function(content){
-            $('.hp_cur').text(content);
-        });
-        $(".hp_minus").click(function(){
-            $.get("../character/<%= name %>/hp_minus",function(content){
+        <script type="text/javascript">
+            $(".hitpoints").hide();
+            $(".hp_cur").click(function(){
+                $(this).next('.hitpoints').slideToggle(600);
+            });
+            $(".items").hide();
+            $(".itemheader").click(function(){
+                $(this).next('.items').slideToggle(600);
+            });
+            $.get("../character/<%= name %>/hp_cur",function(content){
                 $('.hp_cur').text(content);
             });
-        });
-        $(".hp_plus").click(function(){
-            $.get("../character/<%= name %>/hp_plus",function(content){
-                $('.hp_cur').text(content);
+            $(".hp_minus").click(function(){
+                $.get("../character/<%= name %>/hp_minus",function(content){
+                    $('.hp_cur').text(content);
+                });
             });
-        });
-    </script>
-</body>
+            $(".hp_plus").click(function(){
+                $.get("../character/<%= name %>/hp_plus",function(content){
+                    $('.hp_cur').text(content);
+                });
+            });
+            $("#itemadd").click(function(){
+                var add_item_url = "../character/<%= name %>/add_item/";
+                var item = $("#itemsource").val();
+                add_item_url = add_item_url.concat(item);
+                $.get(add_item_url,function(content){
+                    $('.itemlist').html(content);
+                });
+            });
+        </script>
+    </body>
 <html>
