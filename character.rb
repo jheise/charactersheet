@@ -6,10 +6,18 @@ require 'sqlite3'
 db = SQLite3::Database.new("characters.db")
 
 get "/character/:name/add_item/:item" do
-    puts "/character/#{params['name']}/add_item/#{params['item']} called"
-    results = db.execute("select item from items where player = \"#{params['name']}\";")
-    puts "results for items are #{results}"
-    "#{params['item']}<br/>"
+    results = db.execute("insert into items (player, item) values (\"#{params['name']}\", \"#{params['item']}\");")
+    "success"
+end
+
+get "/character/:name/delete_item/:id" do
+    results = db.execute("delete from items where id=#{params['id']};")
+    "success"
+end
+
+get "/character/:name/items" do
+    results = db.execute("select *  from items where player = \"#{params['name']}\";")
+    erb :items, :locals => { :items => results} 
 end
 
 get "/character/:name/hp_minus" do

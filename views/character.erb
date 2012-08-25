@@ -19,7 +19,7 @@
             <span class="itemheader">Items</span>
             <div class="items">
                 <div class="itemlist">
-                    foobar
+                    (placeholder)
                 </div>
                 <textarea id="itemsource" rows="1" cols="20" style="resize: none'"></textarea><button id="itemadd">add</button>
             </div>
@@ -36,6 +36,9 @@
             $.get("../character/<%= name %>/hp_cur",function(content){
                 $('.hp_cur').text(content);
             });
+            $.get("../character/<%= name %>/items",function(content){
+                $('.itemlist').html(content);
+            });
             $(".hp_minus").click(function(){
                 $.get("../character/<%= name %>/hp_minus",function(content){
                     $('.hp_cur').text(content);
@@ -50,9 +53,12 @@
                 var add_item_url = "../character/<%= name %>/add_item/";
                 var item = $("#itemsource").val();
                 add_item_url = add_item_url.concat(item);
-                $.get(add_item_url,function(content){
-                    $('.itemlist').html(content);
+                $.get(add_item_url,function(){
+                    $.get("../character/<%= name %>/items",function(content){
+                        $('.itemlist').html(content);
+                    });
                 });
+                $('#itemsource').val("");
             });
         </script>
     </body>

@@ -1,0 +1,12 @@
+<% for item in items %>
+<%= item[2] %><button id="item<%= item[0] %>">X</button><br/>
+<script type="text/javascript">
+    $("#item<%= item[0] %>").click(function(){
+        $.get("../character/<%= item[1] %>/delete_item/<%= item[0] %>",function(){
+            $.get("../character/<%= item[1]%>/items",function(content){
+                $('.itemlist').html(content);
+            });
+        });
+    });
+</script>
+<% end %>
