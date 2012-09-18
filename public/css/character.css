@@ -1,12 +1,26 @@
-.itemheader,.hitheader{
+.itemheader,.hitheader,.rollable{
     cursor: pointer;
 }
+
+div.character{
+    display:block;
+
+    /*set the div in the center of the screen*/
+    position:fixed;
+    top:10%;
+    left:35%;
+    width:350px;
+} 
 
 .container{
     width: 220px;
     padding: 10px;
     border: 5px solid black;
     margin: 10px;
+}
+
+.dice{
+    float:right;
 }
 textarea{
     resize: none;

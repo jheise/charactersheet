@@ -6,22 +6,39 @@
         <link rel=StyleSheet href="/css/character.css" type="text/css" media=screen>
         <!--<style type="text/css" src="/css/character.css"></style>-->
         <script type="text/javascript" src="/js/jquery.min.js"></script>
-        <b><%= name %></b><br/>
-        <div class="container">
-            <span class="hitheader">Hit Points</span>
-            <span class="hp_cur">(place holder)</span>
-            <div class="hitpoints">
-                <button class="hp_minus">-</button> <button class="hp_plus">+</button><br/>
-                Maximum hit points: <%= hp_max %><br/>
+        <div class="character">
+            <b><%= name %></b><br/>
+            <div class="container">
+                <span class="hitheader">Hit Points</span>
+                <span class="hp_cur">(place holder)</span>
+                <div class="hitpoints">
+                    <button class="hp_minus">-</button> <button class="hp_plus">+</button><br/>
+                    Maximum hit points: <%= hp_max %><br/>
+                </div>
+            </div>
+            <div class="container">
+                <span class="itemheader">Items</span>
+                <div class="items">
+                    <div class="itemlist">
+                        (placeholder)
+                    </div>
+                    <textarea id="itemsource" rows="1" cols="20" style="resize: none'"></textarea><button id="itemadd">add</button>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <span class="itemheader">Items</span>
-            <div class="items">
-                <div class="itemlist">
-                    (placeholder)
+        <div class="dice">
+            <div class="container">
+                Dice:<br/>
+                <span class="rollable" id="d4">d4</span><br/>
+                <span class="rollable" id="d6">d6</span><br/>
+                <span class="rollable" id="d8">d8</span><br/>
+                <span class="rollable" id="d10">d10</span><br/>
+                <span class="rollable" id="d12">d12</span><br/>
+                <span class="rollable" id="d20">d20</span><br/>
+                <span class="rollable" id="d100">d100</span><br/>
+                <div class="rolling">
+                <b>7</b>
                 </div>
-                <textarea id="itemsource" rows="1" cols="20" style="resize: none'"></textarea><button id="itemadd">add</button>
             </div>
         </div>
         <script type="text/javascript">
@@ -59,6 +76,35 @@
                     });
                 });
                 $('#itemsource').val("");
+            });
+            $(".rollable").click(function(){
+                var die = $(this).attr("id");
+                var value = "foobar"
+                switch(die){
+                    case "d4":
+                        value = 4;
+                        break;
+                    case "d6":
+                        value = 6;
+                        break;
+                    case "d8":
+                        value = 8;
+                        break;
+                    case "d10":
+                        value = 10;
+                        break;
+                    case "d12":
+                        value = 12;
+                        break;
+                    case "d20":
+                        value = 20;
+                        break;
+                    case "d100":
+                        value = 100;
+                        break;
+                }
+                var result = Math.floor(Math.random() * value + 1);
+                $('.rolling').text(result);
             });
         </script>
     </body>
